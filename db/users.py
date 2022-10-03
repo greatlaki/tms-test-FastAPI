@@ -1,5 +1,5 @@
 import sqlalchemy
-from base import metadata
+from .base import metadata
 import datetime
 
 users = sqlalchemy.Table(
@@ -10,6 +10,6 @@ users = sqlalchemy.Table(
     sqlalchemy.Column('name', sqlalchemy.String),
     sqlalchemy.Column('hashed_password', sqlalchemy.String),
     sqlalchemy.Column('is_company', sqlalchemy.Boolean),
-    sqlalchemy.Column('created_at', sqlalchemy.DataTime, default=datetime.datetime.utcnow),
-    sqlalchemy.Column('updated_at', sqlalchemy.DataTime, default=datetime.datetime.utcnow),
+    sqlalchemy.Column('created_at', sqlalchemy.DateTime, default=datetime.datetime.utcnow),
+    sqlalchemy.Column('updated_at', sqlalchemy.DateTime, default=datetime.datetime.utcnow),
 )
