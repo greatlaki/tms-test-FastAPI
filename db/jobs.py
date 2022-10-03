@@ -1,5 +1,5 @@
 import sqlalchemy
-from base import metadata
+from .base import metadata
 import datetime
 
 jobs = sqlalchemy.Table(
@@ -12,6 +12,6 @@ jobs = sqlalchemy.Table(
     sqlalchemy.Column('salary_from', sqlalchemy.Integer),
     sqlalchemy.Column('salary_to', sqlalchemy.Integer),
     sqlalchemy.Column('is_active', sqlalchemy.Boolean),
-    sqlalchemy.Column('created_at', sqlalchemy.DataTime, default=datetime.datetime.utcnow),
-    sqlalchemy.Column('updated_at', sqlalchemy.DataTime, default=datetime.datetime.utcnow),
+    sqlalchemy.Column('created_at', sqlalchemy.DateTime, default=datetime.datetime.utcnow),
+    sqlalchemy.Column('updated_at', sqlalchemy.DateTime, default=datetime.datetime.utcnow),
 )
