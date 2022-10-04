@@ -1,6 +1,6 @@
 import datetime
 from typing import Optional
-from pydantic import BaseModel, EmailStr, validator
+from pydantic import BaseModel, EmailStr, validator, constr
 
 
 class User(BaseModel):
@@ -16,9 +16,9 @@ class User(BaseModel):
 class UserIn(BaseModel):
     name: str
     email: EmailStr
-    password: str
+    password: constr(min_length=8)
     password2: str
-    is_company: bool
+    is_company: bool = False
 
     @validator('password2')
     def password_match(cls, v, values, **kwargs):
