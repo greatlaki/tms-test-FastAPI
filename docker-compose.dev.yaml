@@ -1,12 +1,25 @@
-version: '3'
+version: '3.9'
+
 services:
   db:
-    image:  postgres:11
-    ports:
-      - 32700:5432
-    volumes:
-      - ./data:/var/lib/postgresql/data
+    container_name: pg_db
+    image:  postgres:14-alpine
+    restart: always
     environment:
-      POSTGRES_USER:  root
-      POSTGRES_PASSWORD:  root
-      POSTGRES_DB: employment_exchange
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: employment_ex
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "32700:5432"
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: greatlaki911@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: qweasd
+    ports:
+      - "5050:80"
