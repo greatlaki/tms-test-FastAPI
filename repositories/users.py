@@ -3,7 +3,7 @@ from typing import List, Optional
 from db.users import users
 from models.user import User, UserIn
 from core.security import hash_password
-from base import BaseRepository
+from repositories.base import BaseRepository
 
 
 class UserRepository(BaseRepository):

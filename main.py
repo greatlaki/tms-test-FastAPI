@@ -7,11 +7,6 @@ app = FastAPI(title='Employment exchange')
 app.include_router(users.router, prefix='/users', tags=['users'])
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
 @app.on_event('startup')
 async def startup():
     await database.connect()
