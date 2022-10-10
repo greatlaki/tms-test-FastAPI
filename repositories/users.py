@@ -72,8 +72,8 @@ class UserRepository(BaseRepository):
         """
         The function returns a user by email
         """
-        query = users.select().where(users.c.email == email).first()
+        query = users.select().where(users.c.email == email)
         user = await self.database.fetch_one(query=query)
-        if user in None:
+        if user is None:
             return None
         return User.parse_obj(user)
