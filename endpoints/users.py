@@ -16,4 +16,4 @@ async def read_users(
     limit: maximum number of users
     skip: how many users to skip for pagination
     """
-    return {}
+    return await users.get_all(limit=limit, skip=0)
