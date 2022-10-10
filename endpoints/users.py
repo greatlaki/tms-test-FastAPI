@@ -1,8 +1,8 @@
 from typing import List
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from models.user import User, UserIn
 from repositories.users import UserRepository
-from endpoints.depends import get_user_repository
+from endpoints.depends import get_user_repository, get_current_user
 
 router = APIRouter()
 
@@ -30,6 +30,13 @@ async def create(
 
 
 @router.put("/", response_model=User)
-async def create(id: int, user: UserIn, users: UserRepository = Depends(get_user_repository)):
+async def update_user(
+        id: int,
+        user: UserIn,
+        users: UserRepository = Depends(get_user_repository),
+        current_user: User = Depends(get_current_user)):
     """ It updates a user"""
+    old_user = await users.get_by_id(id=id)
+    if old_user is None or old_user.email != current_user.email:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not found user")
     return await users.update(id=id, u=user)
