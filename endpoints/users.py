@@ -27,3 +27,9 @@ async def create(
         users: UserRepository = Depends(get_user_repository)):
     """ It creates a user"""
     return await users.create(u=user)
+
+
+@router.put("/", response_model=User)
+async def create(id: int, user: UserIn, users: UserRepository = Depends(get_user_repository)):
+    """ It updates a user"""
+    return await users.update(id=id, u=user)
