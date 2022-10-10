@@ -1,11 +1,13 @@
+from typing import List
 from fastapi import APIRouter, Depends
+from models.user import User
 from repositories.users import UserRepository
 from endpoints.depends import get_user_repository
 
 router = APIRouter()
 
 
-@router.get("/")
+@router.get("/", response_model=List[User])
 async def read_users(
         users: UserRepository = Depends(get_user_repository),
         limit: int = 100,
